@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=State
+comment0.text=\n\ Tic-Tac-Toe\ state\ variables.\n
+comment1.params=
+comment1.target=boolean\ isWinner()
+comment2.params=
+comment2.target=boolean\ isTie()
+numComments=3
