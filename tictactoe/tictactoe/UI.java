@@ -12,9 +12,29 @@ public class UI
     public UI() {
         scanner = new Scanner(System.in);         
     }
-    
+    // Utility methods
+    public String getXOrO(int whoseMove) {
+        return (whoseMove == -1) ? "X" : "O";
+    }
+
+    public String getPlayerName(int whoseMove, String xName, String oName) {
+        return (whoseMove == -1) ? xName : oName;
+    }
+
+    public boolean isLegalMove(State state, int row, int col) {
+        return 1 <= row && row <= Constants.BOARD_SIZE &&
+        1 <= col && col <= Constants.BOARD_SIZE &&
+        state.getBoardCell(row, col) == Constants.BLANK;
+    }
+
+    // Prompt for input methods
+    public String promptForName(int player) {
+        System.out.printf(Constants.GET_PLAYER_NAME, player);
+        return scanner.next();
+    }
+
     public int getMoveRow(int whoseMove, String xName, String oName) {
-        int row;
+        int row = 0;
         while (row <= 0 || row >= 4) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
@@ -27,7 +47,7 @@ public class UI
     }
 
     public int getMoveCol(int whoseMove, String xName, String oName) {
-        int col;
+        int col = 0;
         while (col <= 0 || col >= 4) {
             try {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
