@@ -11,14 +11,48 @@ public class State
     private String oName = "";
     private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 
+    private void checkLine(int function) {
+
+    }
+
     public boolean isWinner() {
-        // You will write this code!!
-        return true;
+
+        // y=i
+
+        for (int y = 0; y < Constants.BOARD_SIZE; y++){
+            
+            int total = 0;
+            
+            for (int i = 0; i < Constants.BOARD_SIZE; i++){
+                total += board[y][i];
+            }
+            
+            if (Math.abs(total) == Constants.BOARD_SIZE) {
+                return true;
+            }
+        }
+
+        // x=i
+
+        for (int x = 0; x < Constants.BOARD_SIZE; x++){
+            
+            int total = 0;
+            
+            for (int i = 0; i < Constants.BOARD_SIZE; i++){
+                total += board[i][x];
+            }
+            
+            if (Math.abs(total) == Constants.BOARD_SIZE) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean isTie() {
         // You will write this code too!!
-        return true;
+        return false;
     }
 
     public int getGameState() {
@@ -40,23 +74,23 @@ public class State
     public void setXName(String name) {
         this.xName = name;
     }
-    
+
     public void setOName(String name) {
         this.oName = name;
     }
-    
+
     public int getWhoseMove() {
         return this.whoseMove;
     }
-    
+
     public void setWhoseMove(int whoseMove) {
         this.whoseMove = whoseMove;
     }
-    
+
     public String getXName() {
         return this.xName;
     }
-    
+
     public String getOName() {
         return this.oName;
     }
