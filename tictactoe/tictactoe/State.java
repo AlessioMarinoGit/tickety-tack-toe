@@ -11,8 +11,44 @@ public class State
     private String oName = "";
     private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
 
-    private void checkLine(int function) {
+    private boolean checkColumn(int column) {
+        int total = 0;
 
+        for (int i = 0; i < Constants.BOARD_SIZE; i++){
+            total += board[column][i];
+        }
+
+        if (Math.abs(total) == Constants.BOARD_SIZE) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkRow(int row) {
+        int total = 0;
+
+        for (int i = 0; i < Constants.BOARD_SIZE; i++){
+            total += board[i][row];
+        }
+
+        if (Math.abs(total) == Constants.BOARD_SIZE) {
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean checkDiagonal (int dir) {
+        int total = 0;
+        
+        for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+            total += board[i*dir - (dir-Math.abs(dir))][i*dir - (dir-Math.abs(dir))];
+        }
+        
+        if (Math.abs(total) == Constants.BOARD_SIZE) {
+            return true;
+        }
+        
+        return false;
     }
 
     public boolean isWinner() {
@@ -20,14 +56,7 @@ public class State
         // y=i
 
         for (int y = 0; y < Constants.BOARD_SIZE; y++){
-            
-            int total = 0;
-            
-            for (int i = 0; i < Constants.BOARD_SIZE; i++){
-                total += board[y][i];
-            }
-            
-            if (Math.abs(total) == Constants.BOARD_SIZE) {
+            if (this.checkColumn(y) == true) {
                 return true;
             }
         }
@@ -35,17 +64,12 @@ public class State
         // x=i
 
         for (int x = 0; x < Constants.BOARD_SIZE; x++){
-            
-            int total = 0;
-            
-            for (int i = 0; i < Constants.BOARD_SIZE; i++){
-                total += board[i][x];
-            }
-            
-            if (Math.abs(total) == Constants.BOARD_SIZE) {
+            if (this.checkRow(x) == true) {
                 return true;
             }
         }
+        
+        
 
         return false;
     }
