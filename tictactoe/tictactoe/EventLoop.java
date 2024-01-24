@@ -19,14 +19,15 @@ public class EventLoop {
         state.setGameState(Constants.GET_X_NAME);
 
       } else if (gameState == Constants.GET_X_NAME) {
-        state.setXName(ui.promptForName(Constants.X));
+        state.setXName(ui.promptForName("X"));
         state.setGameState(Constants.GET_O_NAME);
     
       } else if (gameState == Constants.GET_O_NAME) {
-        state.setOName(ui.promptForName(Constants.O));
+        state.setOName(ui.promptForName("O"));
         state.setGameState(Constants.GET_X_MOVE);
     
       } else if (gameState == Constants.GET_X_MOVE) {
+        ui.printBoard(state);
         row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
         if (ui.isLegalMove(state, row, col)) {
@@ -34,6 +35,7 @@ public class EventLoop {
         }
 
       } else if (gameState == Constants.GET_O_MOVE) {
+        ui.printBoard(state);
         row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
         if (ui.isLegalMove(state, row, col)) {

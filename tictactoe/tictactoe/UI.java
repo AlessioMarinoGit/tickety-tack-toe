@@ -28,7 +28,7 @@ public class UI
     }
 
     // Prompt for input methods
-    public String promptForName(int player) {
+    public String promptForName(String player) {
         System.out.printf(Constants.GET_PLAYER_NAME, player);
         return scanner.next();
     }
@@ -38,6 +38,7 @@ public class UI
         while (row <= 0 || row >= 4) {
             try {
                 System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
+                System.out.println();
                 row = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
@@ -72,8 +73,9 @@ public class UI
 
     public void printBoard(State state) {
         System.out.println(Constants.DIVIDER_STRING);
-        for (int row = 0; row < Constants.BOARD_SIZE; row++) {
-            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)));
+        for (int row = 1; row <= Constants.BOARD_SIZE; row++) {
+            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)), getXOrO(state.getBoardCell(row, 3)));
+            System.out.println();
             System.out.println(Constants.DIVIDER_STRING);
         }
     }

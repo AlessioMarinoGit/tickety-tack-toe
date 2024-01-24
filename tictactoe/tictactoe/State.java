@@ -41,7 +41,12 @@ public class State
         int total = 0;
         
         for (int i = 0; i < Constants.BOARD_SIZE; i++) {
-            total += board[i*dir - (dir-Math.abs(dir))][i*dir - (dir-Math.abs(dir))];
+            if (dir == -1) {
+                System.out.println(board[(dir*i)+Constants.BOARD_SIZE-1][(dir*i)+Constants.BOARD_SIZE-1]);
+                total += board[(dir*i)+Constants.BOARD_SIZE-1][(dir*i)+Constants.BOARD_SIZE-1];
+            } else {
+                total += board[dir][dir];
+            }
         }
         
         if (Math.abs(total) == Constants.BOARD_SIZE) {
@@ -69,8 +74,13 @@ public class State
             }
         }
         
+        if (this.checkDiagonal(1) == true) {
+            return true;
+        }
+        if (this.checkDiagonal(-1) == true) {
+            return true;
+        }
         
-
         return false;
     }
 
