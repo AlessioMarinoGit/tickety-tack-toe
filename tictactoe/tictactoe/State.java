@@ -37,22 +37,29 @@ public class State
         return false;
     }
     
-    private boolean checkDiagonal (int dir) {
+    private boolean checkDiagonalA() {
         int total = 0;
         
         for (int i = 0; i < Constants.BOARD_SIZE; i++) {
-            if (dir == -1) {
-                System.out.println(board[(dir*i)+Constants.BOARD_SIZE-1][(dir*i)+Constants.BOARD_SIZE-1]);
-                total += board[(dir*i)+Constants.BOARD_SIZE-1][(dir*i)+Constants.BOARD_SIZE-1];
-            } else {
-                total += board[dir][dir];
-            }
+            total += board[i][i];
         }
         
         if (Math.abs(total) == Constants.BOARD_SIZE) {
             return true;
         }
+        return false;
+    }
+    
+    private boolean checkDiagonalB() {
+        int total = 0;
         
+        for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+            total += board[i][-i+Constants.BOARD_SIZE-1];
+        }
+        
+        if (Math.abs(total) == Constants.BOARD_SIZE) {
+            return true;
+        }
         return false;
     }
 
@@ -74,10 +81,10 @@ public class State
             }
         }
         
-        if (this.checkDiagonal(1) == true) {
+        if (this.checkDiagonalA() == true) {
             return true;
         }
-        if (this.checkDiagonal(-1) == true) {
+        if (this.checkDiagonalB() == true) {
             return true;
         }
         
@@ -85,7 +92,17 @@ public class State
     }
 
     public boolean isTie() {
-        // You will write this code too!!
+        for (int x = 0; x < Constants.BOARD_SIZE; x++) {
+            for (int y = 0; y < Constants.BOARD_SIZE; y++) {
+                if (board[x][y] == Constants.BLANK) {
+                    return false;
+                }
+            }
+        }
+        
+        if (this.isWinner() == false) {
+            return true;
+        }
         return false;
     }
 

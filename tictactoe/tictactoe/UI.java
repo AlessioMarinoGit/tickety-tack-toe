@@ -14,7 +14,12 @@ public class UI
     }
     // Utility methods
     public String getXOrO(int whoseMove) {
-        return (whoseMove == -1) ? "X" : "O";
+        if (whoseMove == -1) {
+            return "X";
+        } else if (whoseMove == 1) {
+            return "O";
+        }
+        return " ";
     }
 
     public String getPlayerName(int whoseMove, String xName, String oName) {
@@ -63,7 +68,7 @@ public class UI
     public boolean startNewGame() {
         System.out.println(Constants.START_NEW_GAME);
         String yesOrNo = scanner.next();
-        return yesOrNo == "T";
+        return yesOrNo.equals("Y") || yesOrNo.equals("y");
     }
 
     // Printing text methods
@@ -80,8 +85,8 @@ public class UI
         }
     }
 
-    public void printInvalidRowOrColumn(int rowOrCol) {
-        System.out.printf(Constants.INVALID_ROW_OR_COLUMN, rowOrCol);
+    public void printInvalidRowOrColumn() {
+        System.out.printf(Constants.INVALID_ROW_OR_COLUMN);
     }
 
     public void printInvalidMove(int row, int col) {
@@ -90,10 +95,12 @@ public class UI
 
     public void printMove(State state, int row, int col) {
         System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
+        System.out.println();
     } 
 
     public void printWinner(State state) {
         System.out.printf(Constants.WINNER, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()));
+        System.out.println();
     }
 
     public void printTieGame() {
