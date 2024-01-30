@@ -32,6 +32,8 @@ public class EventLoop {
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
                 if (ui.isLegalMove(state, row, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
+                } else {
+                    ui.printInvalidMove(row, col);
                 }
 
             } else if (gameState == Constants.GET_O_MOVE) {
@@ -40,6 +42,8 @@ public class EventLoop {
                 col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
                 if (ui.isLegalMove(state, row, col)) {
                     state.setGameState(Constants.MAKE_MOVE);
+                } else {
+                    ui.printInvalidMove(row, col);
                 }
 
             } else if (gameState == Constants.MAKE_MOVE) {
@@ -82,8 +86,8 @@ public class EventLoop {
             } else if (gameState == Constants.GAME_OVER) {
                 if (ui.startNewGame()) {
                     state.setGameState(Constants.STANDBY);
-                    for (int x = 0; x < Constants.BOARD_SIZE; x++) {
-                        for (int y = 0; y < Constants.BOARD_SIZE; y++) {
+                    for (int x = 1; x <= Constants.BOARD_SIZE; x++) {
+                        for (int y = 1; y <= Constants.BOARD_SIZE; y++) {
                             state.setBoardCell(x, y, Constants.BLANK);
                         }
                     }

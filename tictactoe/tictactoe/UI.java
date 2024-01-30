@@ -47,6 +47,10 @@ public class UI
                 row = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                scanner.next();
+            }
+            if (row >= 4) {
+                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
             }
         }
         return row;
@@ -59,6 +63,10 @@ public class UI
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 col = scanner.nextInt();
             } catch (Exception e) {
+                System.out.println(Constants.INVALID_ROW_OR_COLUMN);
+                scanner.next();
+            }
+            if (col <= 0 || col >= 4) {
                 System.out.println(Constants.INVALID_ROW_OR_COLUMN);
             }
         }
@@ -91,6 +99,7 @@ public class UI
 
     public void printInvalidMove(int row, int col) {
         System.out.printf(Constants.INVALID_MOVE_ERROR, row, col);
+        System.out.println();
     }
 
     public void printMove(State state, int row, int col) {
